@@ -51,6 +51,10 @@ app.use(express.json())
 // ============================================================
 
 
+app.get('/about', (req, res) => {
+    console.log('About Route Hit')
+})
+
 // ROUTES //
 app.use('/gamers', routes.gamers)
 app.use('/users', routes.users)
