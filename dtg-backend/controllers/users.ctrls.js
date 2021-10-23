@@ -1,5 +1,14 @@
 const db = require('../models');
-const bcyrpt = require('bcrypt')
+const bcrypt = require('bcrypt')
+
+// index
+const index = (req, res) => {
+  db.User.find({}, (error, user) => {
+      if (error) return res.status(400).json({error: error.message})
+
+      return res.status(200).json(user)
+  })
+}
 
 
 // POST -- sign up
@@ -50,6 +59,7 @@ const logout = (req, res) => {
 
 
 module.exports = {
+    index,
     signup,
     login,
     logout, 
