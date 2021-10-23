@@ -1,4 +1,4 @@
 module.exports = {
     gamers: require('./gamers.routes'),
-    user: require('./user.routes')
+    users: require('./users.routes')
 }

@@ -1,4 +1,4 @@
 module.exports = {
-	user: require('./user.ctrls'),
+	users: require('./users.ctrls'),
 	gamers: require('./gamers.ctrls')
 }
