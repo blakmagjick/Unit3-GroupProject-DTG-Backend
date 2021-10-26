@@ -3,6 +3,7 @@ const express = require('express')
 
 // EXPRESS INSTANCE ===============================
 const app = express()
+
 require('dotenv').config()
 // PORT ===========================================
 const PORT = process.env.PORT
@@ -11,11 +12,11 @@ const PORT = process.env.PORT
 const routes = require('./routes')
 
 // DB CONNECTION ==================================
+require('./config/db.connection')
 
 
 // CORS //
 const cors = require('cors')
-
 
 const mongoose  = require('mongoose')
 const mongoURI = process.env.MONGOURI
@@ -69,9 +70,13 @@ const isAuthenticated = (req, res, next) => {
         res.status(403).json({msg:"login required"})
     }
 }
-   
 
 app.use(express.json())
+
+
+app.get('/about', (req, res) => {
+    console.log('About Route Hit')
+})
 
 app.get('/about', (req, res) => {
     console.log('About Route Hit')
@@ -81,5 +86,5 @@ app.use('/gamers', routes.gamers)
 app.use('/users', routes.users)
 
 app.listen(PORT, () => {
-    console.log(`🎮 Watching you play games on port${PORT}`)
+    console.log(`🎮 Watching you play games on port: ${PORT}`)
 })
