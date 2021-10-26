@@ -5,6 +5,7 @@ const express = require('express')
 const app = express()
 
 // PORT ===========================================
+require('dotenv').config()
 const PORT = process.env.PORT || 3003
 
 // INTERNAL ROUTES ================================
