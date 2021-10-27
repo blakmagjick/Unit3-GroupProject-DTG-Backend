@@ -1,19 +1,27 @@
-const mongoose = require('mongoose')
 
-// == connection string ==
-const connectionStr = process.env.MONGODB_URI || 'mongodb://localhost:27017/dtgDB'
+// require('dotenv').config()
+// //const method_override = require('method-override')
+// const PORT = process.env.PORT
+// const mongoose  = require('mongoose')
+// const mongoURI = process.env.MONGOURI
+// const db = mongoose.connection
 
-// == set up connection ==
 
-mongoose.connect(connectionStr, {
-    useNewUrlParser: true,
-    useUnifiedTopology:true,
-})
 
-// == connection updates ==
 
-mongoose.connection.on('connected', () => console.log('Mongodb connected 😊'))
+// // Connect to Mongo
+// mongoose.connect(mongoURI, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+//   }, ()=> {
+//       console.log('database connected')
+//   })
+  
+// db.on('error', (err) => { console.log('ERROR: ', err) })
+// db.on('connected', () => { console.log('mongo connected') })
+// db.on('disconnected', () => { console.log('mongo disconnected')})
+  
+// app.use(express.static("public"))
+// app.use(express.urlencoded({extended: false}))
+// //app.use(method_override('_method'))
 
-mongoose.connection.on('error', (error) => console.log('Mongodb error', error))
-
-mongoose.connection.on('disconnected', ()=> console.log('Mongodb disconnected 😢'))

@@ -1,0 +1,22 @@
+{
+  "name": "unit3-groupproject-dtg-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HongNgo20/Unit3-GroupProject-DTG-Backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HongNgo20/Unit3-GroupProject-DTG-Backend/issues"
+  },
+  "homepage": "https://github.com/HongNgo20/Unit3-GroupProject-DTG-Backend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
