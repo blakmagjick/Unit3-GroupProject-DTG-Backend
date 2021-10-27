@@ -6,6 +6,6 @@ const ctrls = require('../controllers')
 router.get('/', ctrls.users.index)
 router.post('/login', ctrls.users.login)
 router.post('/signup', ctrls.users.signup)
-router.delete('/logout/:id', ctrls.users.logout)
+router.delete('/logout', ctrls.users.logout)
 
 module.exports = router
