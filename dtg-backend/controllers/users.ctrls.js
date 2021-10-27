@@ -57,7 +57,6 @@ const logout = (req, res) => {
   })
 }
 
-
 module.exports = {
     index,
     signup,

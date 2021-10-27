@@ -1,7 +1,6 @@
 const db = require('../models');
 
 const index = (req, res) => {
-  console.log("resquest, received")
   db.Gamer.find({}, (error, gamer) => {
       if (error) return res.status(400).json({error: error.message})
 

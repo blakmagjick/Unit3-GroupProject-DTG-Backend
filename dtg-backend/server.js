@@ -4,9 +4,9 @@ const express = require('express')
 // EXPRESS INSTANCE ===============================
 const app = express()
 
+// PORT ==========================================
 require('dotenv').config()
-// PORT ===========================================
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3003
 
 // INTERNAL ROUTES ================================
 const routes = require('./routes')
@@ -14,31 +14,8 @@ const routes = require('./routes')
 // DB CONNECTION ==================================
 require('./config/db.connection')
 
-
 // CORS //
 const cors = require('cors')
-
-const mongoose  = require('mongoose')
-const mongoURI = process.env.MONGOURI
-const db = mongoose.connection
-
-
-
-
-// Connect to Mongo
-mongoose.connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  }, ()=> {
-      console.log('database connected')
-  })
-  
-db.on('error', (err) => { console.log('ERROR: ', err) })
-db.on('connected', () => { console.log('mongo connected') })
-db.on('disconnected', () => { console.log('mongo disconnected')})
-  
-app.use(express.static("public"))
-app.use(express.urlencoded({extended: false}))
 
 // MIDDLEWARE =====================================
 const whitelist = ['http://localhost:3000', 'Heroku Frontend URL HERE']
@@ -70,16 +47,14 @@ const isAuthenticated = (req, res, next) => {
         res.status(403).json({msg:"login required"})
     }
 }
-
+    
 app.use(express.json())
+// ============================================================
 
 app.get('/about', (req, res) => {
     console.log('About Route Hit')
 })
 
-app.get('/about', (req, res) => {
-    console.log('About Route Hit')
-})
 // ROUTES //
 app.use('/gamers', isAuthenticated, routes.gamers)
 app.use('/users', routes.users)
