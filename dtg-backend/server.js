@@ -48,6 +48,7 @@ const isAuthenticated = (req, res, next) => {
 }
     
 app.use(express.json())
+
 // ============================================================
 
 
@@ -56,7 +57,7 @@ app.get('/about', (req, res) => {
 })
 
 // ROUTES //
-app.use('/gamers', routes.gamers)
+app.use('/gamers', isAuthenticated, routes.gamers)
 app.use('/users', routes.users)
 
 app.listen(PORT, () => {
