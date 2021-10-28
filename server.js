@@ -18,7 +18,7 @@ require('./config/db.connection')
 const cors = require('cors')
 
 // MIDDLEWARE =====================================
-const whitelist = ['http://localhost:3000', 'https://dtg-downtogame.herokuapp.com/']
+const whitelist = ['http://localhost:3000', 'https://dtg-downtogame.herokuapp.com']
 const corsOptions = {
     origin: (origin, callback) => {
         if (whitelist.indexOf(origin) !== -1 || !origin) {
@@ -49,6 +49,7 @@ app.use(session({
             secure: true
         }
     }))
+
     
 const isAuthenticated = (req, res, next) => {
     if (req.session.currentUser) {
