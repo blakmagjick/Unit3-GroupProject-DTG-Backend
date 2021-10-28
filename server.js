@@ -18,7 +18,7 @@ require('./config/db.connection')
 const cors = require('cors')
 
 // MIDDLEWARE =====================================
-const whitelist = ['http://localhost:3000', 'Heroku Frontend URL HERE']
+const whitelist = ['http://localhost:3000', 'https://dtg-downtogame.herokuapp.com/']
 const corsOptions = {
     origin: (origin, callback) => {
         if (whitelist.indexOf(origin) !== -1 || !origin) {
@@ -34,11 +34,21 @@ app.use(cors(corsOptions))
 
 // SESSION CONFIG ===========================
 const session = require('express-session')
+var MongoDBStore = require('connect-mongodb-session')(session)
+
+app.set('trust proxy', 1)
 app.use(session({
-        secret: "asdffjk",
-        resave: false,
-        saveUninitialized: false,
-      }))
+    secret: process.env.SECRET,
+        resave: false,saveUninitialized: false,
+        store: new MongoDBStore({
+            uri: process.env.MONGODB_URI,
+            collection: 'mySessions'
+        }),
+        cookie:{
+            sameSite: 'none',
+            secure: true
+        }
+    }))
     
 const isAuthenticated = (req, res, next) => {
     if (req.session.currentUser) {
