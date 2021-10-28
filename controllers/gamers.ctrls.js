@@ -7,6 +7,14 @@ const index = (req, res) => {
       return res.status(200).json(gamer)
   })
 }
+
+const getById = (req, res) => {
+  db.Gamer.findById(req.params.id, (error, gamer) => {
+      if (error) return res.status(404).json({error: error.message})
+
+      return res.status(200).json(gamer)
+  })
+}
   
 const create = (req, res) => {
     db.Gamer.create(req.body, (error, createdGamer) => {
@@ -45,4 +53,5 @@ module.exports = {
     create,
     destroy, 
     update, 
+    getById
 }

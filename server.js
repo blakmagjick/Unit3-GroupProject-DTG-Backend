@@ -30,25 +30,35 @@ const corsOptions = {
     credentials: true
 }
 
+// app.use(cors())
+// app.options('*', cors())
 app.use(cors(corsOptions))
 
 // SESSION CONFIG ===========================
 const session = require('express-session')
 var MongoDBStore = require('connect-mongodb-session')(session)
 
-app.set('trust proxy', 1)
+// For local use
 app.use(session({
-    secret: process.env.SECRET,
-        resave: false,saveUninitialized: false,
-        store: new MongoDBStore({
-            uri: process.env.MONGODB_URI,
-            collection: 'mySessions'
-        }),
-        cookie:{
-            sameSite: 'none',
-            secure: true
-        }
-    }))
+    secret: "asdffjk",
+    resave: false,
+    saveUninitialized: false,
+  }))
+
+// For deployment
+// app.set('trust proxy', 1)
+// app.use(session({
+//     secret: process.env.SECRET,
+//         resave: false,saveUninitialized: false,
+//         store: new MongoDBStore({
+//             uri: process.env.MONGODB_URI,
+//             collection: 'mySessions'
+//         }),
+//         cookie:{
+//             sameSite: 'none',
+//             secure: true
+//         }
+//     }))
 
     
 const isAuthenticated = (req, res, next) => {
@@ -67,7 +77,7 @@ app.get('/about', (req, res) => {
 })
 
 // ROUTES //
-app.use('/gamers', routes.gamers)
+app.use('/gamers', isAuthenticated, routes.gamers)
 app.use('/users', routes.users)
 
 app.listen(PORT, () => {
