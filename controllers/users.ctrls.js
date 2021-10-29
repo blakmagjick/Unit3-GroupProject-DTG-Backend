@@ -19,7 +19,7 @@ const signup = (req, res) => {
 
   db.User.create(req.body, (error, createdUser) => {
     if(error) {
-      res.statue(400).json({ error: error.message })
+      res.status(400).json({ error: error.message })
     } else {
       console.log('👽 signup successful! 👽')
       res.status(201).json(createdUser)
