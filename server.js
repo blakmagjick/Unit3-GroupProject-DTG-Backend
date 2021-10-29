@@ -39,27 +39,27 @@ const session = require('express-session')
 var MongoDBStore = require('connect-mongodb-session')(session)
 
 // For local use
-// app.use(session({
-//     secret: "asdffjk",
-//     resave: false,
-//     saveUninitialized: false,
-//   }))
+app.use(session({
+    secret: "asdffjk",
+    resave: false,
+    saveUninitialized: false,
+  }))
 
 // For deployment
-app.set('trust proxy', 1)
-app.use(session({
-    secret: process.env.SECRET,
-        resave: false,
-        saveUninitialized: false,
-        store: new MongoDBStore({
-            uri: process.env.MONGODB_URI,
-            collection: 'mySessions'
-        }),
-        cookie:{
-            sameSite: 'none',
-            secure: true
-        }
-    }))
+// app.set('trust proxy', 1)
+// app.use(session({
+//     secret: process.env.SECRET,
+//         resave: false,
+//         saveUninitialized: false,
+//         store: new MongoDBStore({
+//             uri: process.env.MONGODB_URI,
+//             collection: 'mySessions'
+//         }),
+//         cookie:{
+//             sameSite: 'none',
+//             secure: true
+//         }
+//     }))
 
     
 const isAuthenticated = (req, res, next) => {
